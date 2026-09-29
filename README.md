@@ -95,7 +95,9 @@ Outputs are evaluated against behaviour rather than wording alone.
 
 A response does not pass merely because it sounds good. It passes when the system behaves correctly under the conditions being tested.
 
-→ [See the evaluation framework](evaluation-framework.md)
+→ [See the evaluation framework](evaluation-framework.md)  
+→ [View the evaluation results matrix](evaluation-results.md)  
+→ [Download the machine-readable test matrix](data/test-matrix.csv)
 
 ## Example evaluation pattern
 
