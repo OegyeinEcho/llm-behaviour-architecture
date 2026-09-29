@@ -1,117 +1,164 @@
+<div align="center">
+
 # LLM Behaviour Architecture
 
-A practical case study in designing, testing, and refining persistent conversational behaviour in long-context LLM systems.
+### Designing conversational AI that remains coherent when context gets messy
 
-This repository documents a systems approach to conversational AI: how instructions, context, state, memory, user intent, behavioural constraints, and evaluation interact over time.
+**Context Engineering · Behavioural Evaluation · Failure Analysis · Human-AI Interaction**
 
-The focus is not on isolated prompt performance. It is on behaviour that has to remain useful and coherent across changing context, ambiguous requests, conflicting priorities, and real users.
+![Portfolio](https://img.shields.io/badge/Portfolio-Case%20Study-6f5cff)
+![Focus](https://img.shields.io/badge/Focus-LLM%20Behaviour-1f6feb)
+![Method](https://img.shields.io/badge/Method-Evaluate%20→%20Diagnose%20→%20Retest-8250df)
+![Copyright](https://img.shields.io/badge/Copyright-All%20Rights%20Reserved-555)
 
-## What this project demonstrates
+</div>
 
-- Prompt and context engineering
-- Instruction hierarchy and conflict handling
-- Persistent versus task-local context
-- Behavioural evaluation across long interactions
-- Failure-mode analysis
-- Edge-case and adversarial testing
-- Human-in-the-loop safeguards
-- User-agency preservation
-- Iterative evaluation and regression testing
+<p align="center">
+  <img src="assets/system-map.svg" alt="LLM behaviour architecture system map" width="100%">
+</p>
 
-## Core problem
+---
 
-A model can produce a locally plausible response while still failing the actual system objective.
+## The problem
 
-Common causes include:
+A conversational model can produce a fluent, locally plausible answer and still fail the actual system objective.
 
-- relevant context being ignored
-- irrelevant persistent context being over-applied
-- conflicting instructions competing without clear priority
-- behavioural rules drifting over long interactions
-- false continuity or unsupported inference
-- literal compliance that misses user intent
-- uncertainty being hidden behind fluent language
+The failure may sit somewhere else entirely:
 
-The design goal is therefore not simply "better prompts". It is a context and behaviour architecture that makes intended behaviour more stable, inspectable, and testable.
+- the wrong context was retrieved
+- persistent information leaked outside its scope
+- two instructions competed without a clear priority
+- behaviour drifted as the conversation grew
+- the model inferred continuity it did not actually possess
+- the response followed the literal request while missing the user's practical objective
+
+This project treats those failures as **system behaviour**, not as isolated bad prompts.
+
+## What this case study demonstrates
+
+| Capability | What is being tested |
+|---|---|
+| **Context engineering** | What the model should know, when it should use it, and when it should ignore it |
+| **Instruction hierarchy** | Which requirement wins when instructions compete |
+| **Behavioural evaluation** | Whether higher-level behaviour remains stable across varied outputs |
+| **Failure analysis** | Classification by mechanism rather than surface wording |
+| **Long-context testing** | Drift, contamination, stale state, and changing priorities |
+| **Regression testing** | Whether a local fix damages unrelated desired behaviour |
+| **Human-AI interaction** | Relevance, uncertainty, user agency, and useful intervention boundaries |
 
 ## Architecture
 
 ```mermaid
-flowchart TD
+flowchart LR
     A[User intent] --> B[Task-local context]
-    B --> C[Persistent context]
-    C --> D[Behavioural rules]
-    D --> E[Instruction hierarchy]
-    E --> F[Conflict resolution]
-    F --> G[Model response]
-    G --> H[Evaluation]
-    H --> I{Meets behavioural criteria?}
-    I -- Yes --> J[Return output]
-    I -- No --> K[Diagnose failure mode]
-    K --> L[Adjust context / rule / evaluation criterion]
-    L --> G
+    C[Persistent context] --> D[Relevance gate]
+    B --> E[Behavioural rules]
+    D --> E
+    E --> F[Instruction hierarchy]
+    F --> G[Conflict resolution]
+    G --> H[Model response]
+    H --> I[Evaluation]
+    I -->|Pass| J[Return output]
+    I -->|Fail| K[Classify mechanism]
+    K --> L[Change smallest relevant layer]
+    L --> H
 ```
 
-See [architecture.md](architecture.md) for the design logic.
+The architecture separates **what the system knows** from **how the system should behave**.
 
-## Evaluation loop
+That separation matters because adding more information does not automatically improve reliability. In long-context systems, additional state can create new failure modes unless relevance, scope, and priority are explicit.
 
-The system is assessed against behaviour rather than style alone.
+→ [Read the architecture](architecture.md)
 
-| Dimension | Example question |
-|---|---|
-| Relevance | Did the system use only context that materially applies? |
-| Instruction adherence | Did it follow the correct instruction when rules conflicted? |
-| User intent | Did it solve the user's actual task rather than only the literal wording? |
-| Context stability | Did behaviour remain coherent as context accumulated? |
-| Uncertainty | Did it distinguish known facts, inference, and missing information? |
-| User agency | Did it inform and assist without taking over decisions unnecessarily? |
-| Regression resistance | Did a fix introduce a new failure elsewhere? |
+## Failure catalogue
 
-See [evaluation-framework.md](evaluation-framework.md).
+The repository tracks recurring mechanisms such as:
 
-## Failure analysis
+`instruction drift` · `context contamination` · `priority inversion` · `scope leakage` · `persona instability` · `false continuity` · `overconfident inference` · `unnecessary clarification` · `literal compliance / practical failure` · `regression after local fixes`
 
-The project tracks recurring failure classes instead of treating each bad answer as an isolated event.
+→ [Explore the failure modes](failure-modes.md)
 
-Examples include:
+## Evaluation model
 
-- instruction drift
-- context contamination
-- priority inversion
-- scope leakage
-- persona instability
-- false continuity
-- overconfident inference
-- unnecessary clarification
-- over-application of persistent preferences
-- technically compliant but practically wrong responses
+Outputs are evaluated against behaviour rather than wording alone.
 
-See [failure-modes.md](failure-modes.md).
+**Core dimensions**
 
-## Sanitised examples
+- relevance
+- instruction adherence
+- intent alignment
+- behavioural consistency
+- context stability
+- uncertainty handling
+- user agency
+- regression resistance
 
-The repository includes compact, privacy-safe examples showing:
+A response does not pass merely because it sounds good. It passes when the system behaves correctly under the conditions being tested.
 
-**Observed behaviour → likely cause → intervention → retest**
+→ [See the evaluation framework](evaluation-framework.md)
 
-See [examples/sanitised-test-cases.md](examples/sanitised-test-cases.md).
+## Example evaluation pattern
+
+> **Observed failure**  
+> A persistent preference is applied to an unrelated technical task.
+>
+> **Diagnosis**  
+> The preference exists in persistent context without a relevance boundary.
+>
+> **Intervention**  
+> Add domain-specific relevance gating rather than deleting the preference.
+>
+> **Retest**  
+> The preference is ignored for the technical task.
+>
+> **Regression check**  
+> It still activates correctly in the domain where it belongs.
+
+The full set of reconstructed, privacy-safe examples follows the same pattern:
+
+**Observed behaviour → likely mechanism → intervention → retest → regression check**
+
+→ [View sanitised test cases](examples/sanitised-test-cases.md)
 
 ## Method
 
-1. Define the intended behaviour.
-2. Identify which information belongs in persistent context versus task-local context.
+1. Define intended behaviour in observable terms.
+2. Separate persistent context from task-local state.
 3. Make instruction priority explicit.
-4. Test normal, ambiguous, adversarial, and long-context cases.
-5. Classify failures by mechanism rather than wording.
+4. Test baseline, ambiguity, conflict, long-context, relevance, and adversarial cases.
+5. Classify failure by mechanism.
 6. Change the smallest relevant part of the architecture.
-7. Retest the original case.
-8. Run regression cases to detect collateral failures.
-9. Record what changed and why.
+7. Retest the original failure.
+8. Run regression cases.
+9. Record the decision and why it changed.
 
-## Scope
+## Why the repository is text-first
 
-This is a public, sanitised case study derived from independent applied-AI work. Private or personal source material is excluded. Examples are reconstructed to demonstrate the method without exposing confidential or personal data.
+The technical artefact here is the **behavioural architecture and evaluation logic**.
+
+Code would not make a taxonomy, decision rule, or evaluation criterion more valid simply by making the repository look more technical. A production implementation could later wrap these artefacts in automated test runners, datasets, model/version metadata, observability, scoring, and review queues.
+
+→ [Read the design decisions](design-decisions.md)
+
+## Repository map
+
+```text
+llm-behaviour-architecture/
+├── README.md
+├── architecture.md
+├── failure-modes.md
+├── evaluation-framework.md
+├── design-decisions.md
+├── COPYRIGHT.md
+└── examples/
+    └── sanitised-test-cases.md
+```
+
+## Scope and privacy
+
+This is a public, sanitised portfolio case study derived from independent applied-AI work.
+
+Original private conversations, personal information, and source material are not published. Examples are reconstructed to make the methodology inspectable without exposing private data.
 
 ## Author
 
@@ -119,8 +166,8 @@ This is a public, sanitised case study derived from independent applied-AI work.
 Applied AI Systems & Product Operations  
 LLM Behaviour · Evaluation · Prompt & Context Engineering · Conversational AI
 
-## Copyright
+---
 
 © 2026 Andreea Sackman. All rights reserved.
 
-This repository is published as a portfolio case study. Reuse, redistribution, adaptation, or commercial use requires permission. No open-source licence is granted.
+This repository is published as a portfolio case study. No open-source licence is granted. See [COPYRIGHT.md](COPYRIGHT.md).
