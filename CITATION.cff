@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you reference this portfolio case study or framework, please cite it as below."
 title: "LLM Behaviour Architecture"
+version: "1.0.0"
 authors:
   - family-names: "Sackman"
     given-names: "Andreea"
