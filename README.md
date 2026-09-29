@@ -156,6 +156,14 @@ llm-behaviour-architecture/
     └── sanitised-test-cases.md
 ```
 
+## Limitations and epistemic boundaries
+
+This project distinguishes **observed behaviour** from **hypothesised mechanism**.
+
+A successful intervention can strengthen a causal hypothesis, but model outputs alone do not provide direct access to an opaque model's internal causal process. The framework therefore avoids claims of deterministic behaviour, universal model applicability, or production-scale benchmarking.
+
+→ [Read the limitations and non-goals](LIMITATIONS.md)
+
 ## Scope and privacy
 
 This is a public, sanitised portfolio case study derived from independent applied-AI work.
