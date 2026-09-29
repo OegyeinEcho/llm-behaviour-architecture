@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you reference this portfolio case study or framework, please cite it as below."
+title: "LLM Behaviour Architecture"
+authors:
+  - family-names: "Sackman"
+    given-names: "Andreea"
+repository-code: "https://github.com/OegyeinEcho/llm-behaviour-architecture"
+url: "https://github.com/OegyeinEcho/llm-behaviour-architecture"
+date-released: 2026-09-29
+keywords:
+  - "LLM behaviour"
+  - "context engineering"
+  - "LLM evaluation"
+  - "conversational AI"
+  - "failure analysis"
+  - "human-AI interaction"
+  - "prompt engineering"
+  - "responsible AI"
+abstract: >-
+  A public, sanitised portfolio case study documenting a systems approach
+  to long-context conversational AI behaviour, including context engineering,
+  instruction hierarchy, behavioural evaluation, failure analysis, regression
+  testing, uncertainty handling, and user-agency preservation.
