@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#090d18"/>
+      <stop offset="55%" stop-color="#11172a"/>
+      <stop offset="100%" stop-color="#1c1230"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" x2="1">
+      <stop offset="0%" stop-color="#86b7ff"/>
+      <stop offset="50%" stop-color="#8b6ee8"/>
+      <stop offset="100%" stop-color="#d18cff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <circle cx="1115" cy="115" r="260" fill="none" stroke="#6f5cff" stroke-opacity=".13" stroke-width="2"/>
+  <circle cx="1115" cy="115" r="190" fill="none" stroke="#91a7ff" stroke-opacity=".09" stroke-width="1"/>
+  <path d="M0 505 C250 420 360 555 575 440 S940 290 1280 365" fill="none" stroke="url(#flow)" stroke-opacity=".22" stroke-width="2"/>
+  <path d="M0 530 C250 445 390 565 610 455 S980 315 1280 390" fill="none" stroke="url(#flow)" stroke-opacity=".12" stroke-width="1"/>
+
+  <g transform="translate(74 82)">
+    <text x="0" y="0" fill="#a89dff" font-family="Arial, Helvetica, sans-serif" font-size="19" letter-spacing="4">PORTFOLIO CASE STUDY · v1.0.0</text>
+    <text x="0" y="82" fill="#f4f3fa" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">LLM Behaviour</text>
+    <text x="0" y="146" fill="#f4f3fa" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">Architecture</text>
+    <text x="0" y="202" fill="#bfc5d8" font-family="Arial, Helvetica, sans-serif" font-size="23">Context Engineering · Behavioural Evaluation · Failure Analysis</text>
+  </g>
+
+  <g transform="translate(690 360)" font-family="Arial, Helvetica, sans-serif">
+    <g fill="#151b30" stroke="#7668c9" stroke-width="1.5">
+      <rect x="0" y="0" rx="12" width="142" height="64"/>
+      <rect x="174" y="0" rx="12" width="142" height="64"/>
+      <rect x="348" y="0" rx="12" width="142" height="64"/>
+      <rect x="522" y="0" rx="12" width="142" height="64"/>
+    </g>
+    <g fill="#e6e4f3" font-size="16" text-anchor="middle">
+      <text x="71" y="39">CONTEXT</text>
+      <text x="245" y="39">HIERARCHY</text>
+      <text x="419" y="39">RESPONSE</text>
+      <text x="593" y="39">EVALUATION</text>
+    </g>
+    <g stroke="url(#flow)" stroke-width="3" filter="url(#glow)">
+      <line x1="142" y1="32" x2="174" y2="32"/>
+      <line x1="316" y1="32" x2="348" y2="32"/>
+      <line x1="490" y1="32" x2="522" y2="32"/>
+    </g>
+    <path d="M593 64 C590 150 160 150 71 64" fill="none" stroke="#9d7bf1" stroke-opacity=".7" stroke-width="2"/>
+    <text x="332" y="130" fill="#969db1" font-size="14" text-anchor="middle" letter-spacing="1.5">OBSERVE · HYPOTHESISE · INTERVENE · RETEST · REGRESSION CHECK</text>
+  </g>
+
+  <g transform="translate(74 550)" font-family="Arial, Helvetica, sans-serif">
+    <text x="0" y="0" fill="#ffffff" font-size="20" font-weight="600">Andreea Sackman</text>
+    <text x="0" y="32" fill="#9299ad" font-size="16">Applied AI Systems & Product Operations</text>
+  </g>
+
+  <rect x="74" y="512" width="150" height="3" rx="1.5" fill="url(#flow)"/>
+</svg>
