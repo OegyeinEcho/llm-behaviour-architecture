@@ -10,6 +10,7 @@
 ![Focus](https://img.shields.io/badge/Focus-LLM%20Behaviour-1f6feb)
 ![Method](https://img.shields.io/badge/Method-Evaluate%20→%20Diagnose%20→%20Retest-8250df)
 ![Copyright](https://img.shields.io/badge/Copyright-All%20Rights%20Reserved-555)
+![Version](https://img.shields.io/badge/Case%20Study-v1.0.0-445)
 
 </div>
 
